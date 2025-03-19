@@ -300,7 +300,7 @@
                         <select id="testClass">
                             <option>所有</option>
                             {% for foo in testModules %}
-                            <option value="{{foo|replace('\\','\\')|replace('.','.')}}">{{ foo }}</option>
+                            <option value="{{foo|replace('\\','')|replace('.','')|replace('/','')}}">{{ foo }}</option>
                             {% endfor %}
                         </select>
 
@@ -327,7 +327,7 @@
                 {% for name, foo in cases.items() %}
                 <tr class="case_">
                     <td>{{ loop.index }}</td>
-                    <td class="{{ foo.fileName|replace('\\','\\')|replace('.','.') }}">{{ foo.fileName }}</td>
+                    <td class="{{ foo.fileName|replace('\\','')|replace('.','')|replace('/','') }}">{{ foo.fileName }}</td>
                     <td>{{ foo.method }}</td>
                     <td>{{ foo.desc }}</td>
                     <td>{{ foo.duration }}</td>
