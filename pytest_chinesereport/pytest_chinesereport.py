@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 import time
-import pytest_chinesereport
+from pluggy import hookimpl
 from jinja2 import Environment, FileSystemLoader
 
 test_result = {
@@ -119,7 +119,7 @@ def pytest_sessionfinish(session):
         f.write(report.encode('utf8'))
 
 
-@pytest_chinesereport.hookimpl(tryfirst=True, hookwrapper=True)
+@hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
