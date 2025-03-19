@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name='pytest-chinesereport',
-    version='1.0.1',
+    version='1.0.2',
     author='qiao',
     author_email='1336582921@qq.com',
     maintainer='qiao',
@@ -26,7 +26,7 @@ setup(
     install_requires=['pytest>=3.5.0'],
     packages=find_packages(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Framework :: Pytest',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Testing',
