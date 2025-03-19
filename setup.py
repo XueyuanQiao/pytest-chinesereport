@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name='pytest-chinesereport',
-    version='1.0.2',
+    version='1.0.3',
     author='qiao',
     author_email='1336582921@qq.com',
     maintainer='qiao',

@@ -220,7 +220,7 @@
                     <select id="testClass">
                         <option>所有</option>
                         {% for foo in testModules %}
-                        <option value="{{foo|replace('\\','')|replace('.','')}}">{{ foo }}</option>
+                        <option value="{{foo|replace('\\','\\')|replace('.','.')}}">{{ foo }}</option>
                         {% endfor %}
                     </select>
                 </th>
