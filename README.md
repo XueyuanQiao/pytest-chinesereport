@@ -12,8 +12,9 @@ pytest-chinesereport 是一个针对 pytest 生成中文版 html 报告的插件
 - ###### 命令行执行： pytest 运行测试时加上参数--report 指定报告文件名
 
     ```shell
-    # 指定报告文件名
-    pytest --report=report.html
+    # 指定报告文件名(report为时间戳+后缀，full_report为完整报告文件名，二选一)
+    pytest --report=_report.html
+    pytest --full_report=full_name.html
     
     #其他配置参数
     --title=指定报告标题
