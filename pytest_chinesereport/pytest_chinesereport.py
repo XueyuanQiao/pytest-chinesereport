@@ -81,6 +81,10 @@ def pytest_sessionfinish(session):
     full_report = session.config.getoption('--full_report')
 
     if full_report:
+        test_result['title'] = session.config.getoption('--title') or '测试报告'
+        test_result['tester'] = session.config.getoption('--tester') or '小测试'
+        test_result['desc'] = session.config.getoption('--desc') or '无'
+        templates_name = session.config.getoption('--template') or '1'
         file_name = full_report
     elif report2:
         test_result['title'] = session.config.getoption('--title') or '测试报告'
