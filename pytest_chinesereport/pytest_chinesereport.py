@@ -78,20 +78,22 @@ def handle_history_data(report_dir, test_result):
 def pytest_sessionfinish(session):
     """在整个测试运行完成之后调用的钩子函数,可以在此处生成测试报告"""
     report2 = session.config.getoption('--report')
+    full_report = session.config.getoption('--full_report')
 
-    if report2:
+    if full_report:
+        file_name = full_report
+    elif report2:
         test_result['title'] = session.config.getoption('--title') or '测试报告'
         test_result['tester'] = session.config.getoption('--tester') or '小测试'
         test_result['desc'] = session.config.getoption('--desc') or '无'
         templates_name = session.config.getoption('--template') or '1'
         name = report2
+        if not name.endswith('.html'):
+            file_name = time.strftime("%Y-%m-%d_%H_%M_%S") + name + '.html'
+        else:
+            file_name = time.strftime("%Y-%m-%d_%H_%M_%S") + name
     else:
         return
-
-    if not name.endswith('.html'):
-        file_name = time.strftime("%Y-%m-%d_%H_%M_%S") + name + '.html'
-    else:
-        file_name = time.strftime("%Y-%m-%d_%H_%M_%S") + name
 
     if os.path.isdir('reports'):
         pass
@@ -101,7 +103,7 @@ def pytest_sessionfinish(session):
     test_result["run_time"] = '{:.6f} S'.format(time.time() - test_result["start_time"])
     test_result['all'] = len(test_result['cases'])
     if test_result['all'] != 0:
-        test_result['pass_rate'] = '{:.2f}'.format(test_result['passed'] / test_result['all'] * 100)
+        test_result['pass_rate'] = '{:.2f}'.format((test_result['passed']+test_result['skipped']) / test_result['all'] * 100)
     else:
         test_result['pass_rate'] = 0
     # 保存历史数据
@@ -136,6 +138,13 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_addoption(parser):
     group = parser.getgroup("testreport")
+    group.addoption(
+        "--full_report",
+        action="store",
+        metavar="path",
+        default=None,
+        help="create html report file with given full_name.",
+    )
     group.addoption(
         "--report",
         action="store",
